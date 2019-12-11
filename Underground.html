@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Underground Hangman!</title>
+</head>
+
+<body style="background-color: rosybrown">
+    <h1 style="text-align: center">Hangman!</h1>
+    <p style="text-align: center">Hello! You choose the Underground Hangman!</p>
+    <p id="letters"></p>
+    <script>
+        /*This is a list of all the animals for different habitats
+        that I will use once I ask the user his/her prefered habitat.*/
+
+        var words = [
+            "mole",
+            "aramdillo",
+            "worm",
+            "badger"
+
+        ];
+        alert("You choose Undergound Hangman! You get 7 tries so be careful! Be sure to use only lowercase letters or it will count as a turn!");
+        //holds the number of tries
+        var maxNum = 7;
+        //Selects a random word
+        var word = words[Math.floor(Math.random() * words.length)];
+        //According to the lenngth of the word, this will add the blank spots
+        var answerArray = [];
+        for (var i = 0; i < word.length; i++) {
+            answerArray[i] = "_";
+        }
+
+        var remainingLetters = word.length;
+
+        //This will hold the guesses
+        var guesses = "";
+
+        //Loop for the game, while the guesses stay in between 8, the game will keep looping
+        while (remainingLetters > 0 && guesses.length < maxNum) {
+
+
+            alert(answerArray.join(" "));
+            alert("Your Guesses: " + guesses);
+
+            var guess = prompt("Guess a letter, or click Cancel to stop");
+
+            //We are adding the number of guesses to the array
+            guesses += guess;
+
+
+            if (guess === null) {
+                break; //If the player clicks cancel, the program will break;
+
+            } else if (guess.length !== 1) {
+                alert("Please enter a single letter."); //If the user inputs more than one letter,the program will prompt this.
+
+            } else {
+                for (var j = 0; j < word.length; j++) {
+                    if (word[j] === guess) {
+                        answerArray[j] = guess;
+                        remainingLetters--; //Whenever the user gets the correct letter, we need to decrease the amount of                                  letters by one since we already used that letter.
+                    }
+                }
+            }
+
+
+        }
+
+
+
+        alert(answerArray.join(" "));
+
+
+        alert("Good job, the answer was " + word);
+        //When there is a mouseover, it will display the text
+        function showText(text) {
+            document.getElementById("text").innerHTML = text;
+        }
+        //When there is not a mouseover, it will hide the text
+        function hide() {
+            document.getElementById("text").innerHTML = "";
+
+        }
+
+    </script>
+    <!-- We will display Images on the page with each animal in the game. When the user hovers over a picture, it will give them a fun fact about the animal. -->
+    <img src="mole.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a Mole.  Moles look a little like mice or squirrels, but they’re not rodents. They are digging animals that love to eat bugs. Their favorite food is worms. One mole can eat over 50 pounds of worms in one year.')" onMouseOut="hide();">
+    <img src="worm.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a Worm. Even though worms don’t have eyes, they can sense light, especially at their anterior (front end). They move away from light and will become paralyzed if exposed to light for too long (approximately one hour).')" onMouseOut="hide();">
+    <img src="armadillo.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a Armadillo. Their whole body (head, back, legs and tail) is covered with bony plates. Only three-banded armadillo can curl into the ball to protect itself from predators.')" onMouseOut="hide();">
+    <img src="badger.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a Badger. Badgers are nocturnal mammals. Badgers have stocky bodies with short legs that are suitable for digging. They digs burrows underground called a sett. Their sett are often a maze of tunnels and chambers for sleeping around 6 badgers, setts are kept very clean.')" onMouseOut="hide();">
+    <div id="text"></div>
+
+</body>
+
+</html>
