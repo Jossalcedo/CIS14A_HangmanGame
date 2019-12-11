@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Habitat Hangman!</title>
+</head>
+<style>
+    p.a {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+    
+</style>
+    <p style= "text-align: center "id="dates"></p>
+<body style="background-color: darkgray">
+    <h1 style="text-align: center">Hangman!</h1>
+     <p style="text-align: center" class="a">Welcome to Habitat Hangman! Habitat Hangman lets you choose your prefered habitat and guess an animal for that habitat.</p>
+    
+    <!-- We create the buttons and tag them with an Id so we can reference them to each page -->
+    
+    <button id="Marine" href="Marine.html">
+        Marine
+    </button>
+    <button id="Desert" href="Desert.html">
+        Desert
+    </button>
+    <button id="Underground" href="Underground.html">
+        Underground
+    </button>
+    <button id="Jungle" href="Jungle.html">
+        Jungle
+    </button>
+    
+   
+    <script>
+        var date = new Date();
+        document.getElementById("dates").innerHTML = date;
+        //On click will lead to the other pages using the function below
+       document.getElementById("Marine").onclick = linkClickMar;
+        document.getElementById("Desert").onclick = linkClickDes;
+        document.getElementById("Underground").onclick = linkClickUnd;
+        document.getElementById("Jungle").onclick = linkClickJun;
+       // We create these functions so when we click the buttons, they redirect the page on click to whatever page the user clicked
+        function linkClickMar() {
+            
+            location.href = 'Marine.html';
+            return false;
+        }
+        function linkClickDes() {
+            
+            location.href = 'Desert.html';
+            return false;
+        }
+        function linkClickUnd() {
+            
+            location.href = 'Underground.html';
+            return false;
+        }
+        function linkClickJun() {
+            
+            location.href = 'Jungle.html';
+            return false;
+        }
+      
+        
+    </script>
+</body></html>
