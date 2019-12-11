@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Marine Hangman!</title>
+</head>
+
+<body style="background-color: aqua">
+    <h1 style="text-align: center">Hangman!</h1>
+    <p style="text-align: center">Hello! You choose the Marine Hangman!</p>
+    <p id="letters"></p>
+    <script>
+        /*This is a list of all the animals for different habitats
+        that I will use once I ask the user his/her prefered habitat.*/
+
+        var words = [
+            "dolphin",
+            "shark",
+            "crab",
+            "lobster"
+
+        ];
+        alert("You choose Marine Hangman! You get 7 tries so be careful! Be sure to use only lowercase letters or it will count as a turn!");
+        //holds the number of tries
+        var maxNum = 7;
+        //Selects a random word
+        var word = words[Math.floor(Math.random() * words.length)];
+        //According to the lenngth of the word, this will add the blank spots
+        var answerArray = [];
+        for (var i = 0; i < word.length; i++) {
+            answerArray[i] = "_";
+        }
+
+        var remainingLetters = word.length;
+
+        //This will hold the guesses
+        var guesses = "";
+
+        //Loop for the game, while the guesses stay in between 8, the game will keep looping
+        while (remainingLetters > 0 && guesses.length < maxNum) {
+
+
+            alert(answerArray.join(" "));
+            alert("Your Guesses: " + guesses);
+
+            var guess = prompt("Guess a letter, or click Cancel to stop");
+
+            //We are adding the number of guesses to the array
+            guesses += guess;
+
+
+            if (guess === null) {
+                break; //If the player clicks cancel, the program will break;
+
+            } else if (guess.length !== 1) {
+                alert("Please enter a single letter."); //If the user inputs more than one letter,the program will prompt this.
+
+            } else {
+                for (var j = 0; j < word.length; j++) {
+                    if (word[j] === guess) {
+                        answerArray[j] = guess;
+                        remainingLetters--; //Whenever the user gets the correct letter, we need to decrease the amount of                                  letters by one since we already used that letter.
+                    }
+                }
+            }
+
+
+        }
+
+
+
+        alert(answerArray.join(" "));
+
+
+        alert("Good job, the answer was " + word);
+        //When there is a mouseover, it will display the text
+        function showText(text) {
+            document.getElementById("text").innerHTML = text;
+        }
+        //When there is not a mouseover, it will hide the text
+        function hide() {
+            document.getElementById("text").innerHTML = "";
+
+        }
+
+    </script>
+    <!-- We will display Images on the page with each animal in the game. When the user hovers over a picture, it will give them a fun fact about the animal. -->
+    <img src="shark.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a shark.  Sharks do not have a single bone in their bodies. Instead they have a skeleton made up of cartilage; the same type of tough, flexible tissue that makes up human ears and noses.')" onMouseOut="hide();">
+    <img src="crab.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a crab. Crabs are decapod crustaceans which have a very short tail and are covered with a thick shell, or exoskeleton and are armed with a single pair of claws')" onMouseOut="hide();">
+    <img src="dolphin.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a dolphin. Dolphins are part of the family of toothed whales that includes orcas and pilot whales. They are mammals and breathe through a blowhole on the top of their head.')" onMouseOut="hide();">
+    <img src="lobster.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a lobster. Lobsters are bottom dwellers, meaning they live on the ocean floor. Lobsters feed on clams, crabs, starfish and other sea life')" onMouseOut="hide();">
+    <div id="text"></div>
+
+</body>
+
+</html>
