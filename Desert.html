@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Desert Hangman!</title>
+</head>
+
+<body style="background-color: sandybrown">
+    <h1 style="text-align: center">Hangman!</h1>
+    <p style="text-align: center">Hello! You choose the Desert Hangman!</p>
+    <p id="letters"></p>
+    <script>
+        /*This is a list of all the animals for different habitats
+        that I will use once I ask the user his/her prefered habitat.*/
+
+        var words = [
+            "camel",
+            "tortoise",
+            "coyote",
+            "scorpion"
+
+        ];
+        alert("You choose Desert Hangman! You get 7 tries so be careful! Be sure to use only lowercase letters or it will count as a turn!");
+        //holds the number of tries
+        var maxNum = 7;
+        //Selects a random word
+        var word = words[Math.floor(Math.random() * words.length)];
+        //According to the lenngth of the word, this will add the blank spots
+        var answerArray = [];
+        for (var i = 0; i < word.length; i++) {
+            answerArray[i] = "_";
+        }
+
+        var remainingLetters = word.length;
+
+        //This will hold the guesses
+        var guesses = "";
+
+        //Loop for the game, while the guesses stay in between 8, the game will keep looping
+        while (remainingLetters > 0 && guesses.length < maxNum) {
+
+
+            alert(answerArray.join(" "));
+            alert("Your Guesses: " + guesses);
+
+            var guess = prompt("Guess a letter, or click Cancel to stop");
+
+            //We are adding the number of guesses to the array
+            guesses += guess;
+
+
+            if (guess === null) {
+                break; //If the player clicks cancel, the program will break;
+
+            } else if (guess.length !== 1) {
+                alert("Please enter a single letter."); //If the user inputs more than one letter,the program will prompt this.
+
+            } else {
+                for (var j = 0; j < word.length; j++) {
+                    if (word[j] === guess) {
+                        answerArray[j] = guess;
+                        remainingLetters--; //Whenever the user gets the correct letter, we need to decrease the amount of                                  letters by one since we already used that letter.
+                    }
+                }
+            }
+
+
+        }
+
+
+
+        alert(answerArray.join(" "));
+
+
+        alert("Good job, the answer was " + word);
+        //When there is a mouseover, it will display the text
+        function showText(text) {
+            document.getElementById("text").innerHTML = text;
+        }
+        //When there is not a mouseover, it will hide the text
+        function hide() {
+            document.getElementById("text").innerHTML = "";
+
+        }
+
+    </script>
+    <!-- We will display Images on the page with each animal in the game. When the user hovers over a picture, it will give them a fun fact about the animal. -->
+    <img src="camel.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a Camel. The camel’s hump is actually very useful. Contrary to popular belief, however, the camel’s hump is not filled with water. It consists of stored fat which the camels can resource when food and water are very limited. This fat can be broken down and used as nutrition in emergencies where food is scarce, so camels can go for days without water or food.')" onMouseOut="hide();">
+    <img src="tortoise.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a Tortoise. Tortoises are reptiles and have scales all over their skin. They also have a strong protective shell which they can pulls their head, legs and tail inside to avoid predators.')" onMouseOut="hide();">
+    <img src="Coyote.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a Coyote. Coyotes are omnivores that eat rabbits, rodents, frogs, deer, antelopes, lizards, birds, plants, and carcasses. They hunt at night. Coyotes have 42 teeth. They can run up to 40 MPH when chasing prey.')" onMouseOut="hide();">
+    <img src="Scorpion.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a Scorpion. Scorpions have eight legs, a pair of pincers (pedipalps) and a narrow segmented tail that often curves over their back, on the end of which is a venomous stinger.')" onMouseOut="hide();">
+    <div id="text"></div>
+
+</body>
+
+</html>
