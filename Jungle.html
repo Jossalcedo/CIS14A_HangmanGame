@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Jungle Hangman!</title>
+</head>
+
+<body style="background-color: forestgreen">
+    <h1 style="text-align: center">Hangman!</h1>
+    <p style="text-align: center">Hello! You choose the Jungle Hangman!</p>
+    <p id="letters"></p>
+    <script>
+        /*This is a list of all the animals for different habitats
+        that I will use once I ask the user his/her prefered habitat.*/
+
+        var words = [
+            "gorilla",
+            "monkey",
+            "tiger",
+            "frog"
+
+        ];
+        alert("You choose Jungle Hangman! You get 7 tries so be careful! Be sure to use only lowercase letters or it will count as a turn!");
+        //holds the number of tries
+        var maxNum = 7;
+        //Selects a random word
+        var word = words[Math.floor(Math.random() * words.length)];
+        //According to the lenngth of the word, this will add the blank spots
+        var answerArray = [];
+        for (var i = 0; i < word.length; i++) {
+            answerArray[i] = "_";
+        }
+
+        var remainingLetters = word.length;
+
+        //This will hold the guesses
+        var guesses = "";
+
+        //Loop for the game, while the guesses stay in between 8, the game will keep looping
+        while (remainingLetters > 0 && guesses.length < maxNum) {
+
+
+            alert(answerArray.join(" "));
+            alert("Your Guesses: " + guesses);
+
+            var guess = prompt("Guess a letter, or click Cancel to stop");
+
+            //We are adding the number of guesses to the array
+            guesses += guess;
+
+
+            if (guess === null) {
+                break; //If the player clicks cancel, the program will break;
+
+            } else if (guess.length !== 1) {
+                alert("Please enter a single letter."); //If the user inputs more than one letter,the program will prompt this.
+
+            } else {
+                for (var j = 0; j < word.length; j++) {
+                    if (word[j] === guess) {
+                        answerArray[j] = guess;
+                        remainingLetters--; //Whenever the user gets the correct letter, we need to decrease the amount of                                  letters by one since we already used that letter.
+                    }
+                }
+            }
+
+
+        }
+
+
+
+        alert(answerArray.join(" "));
+
+
+        alert("Good job, the answer was " + word);
+        //When there is a mouseover, it will display the text
+        function showText(text) {
+            document.getElementById("text").innerHTML = text;
+        }
+        //When there is not a mouseover, it will hide the text
+        function hide() {
+            document.getElementById("text").innerHTML = "";
+
+        }
+
+    </script>
+    <!-- We will display Images on the page with each animal in the game. When the user hovers over a picture, it will give them a fun fact about the animal. -->
+    <img src="gorilla.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a Gorilla.  Gorillas are the world’s largest primates, with males weighing around 143-169kg and standing about 1.4-1.8m tall in the wild. Females tend to be 20-30cm shorter and weigh roughly half what the males do. A male gorilla’s armspan is enormous, stretching 2.3-2.6m, while female gorilla’s armspans are proportionally smaller..')" onMouseOut="hide();">
+    <img src="monkey.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a Monkey. Monkeys can understand written numbers and can even count. They can also understand basic parts of arithmetic and even, in rare cases, multiplication')" onMouseOut="hide();">
+    <img src="tiger.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a Tiger. Tigers are the largest cat species in the world reaching up to 3.3 meters in length and weighing up to 670 pounds!')" onMouseOut="hide();">
+    <img src="Frog.jpg" style="width: 300px;height: 300px;" border="3" id="image" onMouseOver="showText('This is a Frog.  Many frogs can jump 20 times their own height.The colourful skin of many tropical frogs acts as a warning to predators that these frogs are poisonous.')" onMouseOut="hide();">
+    <div id="text"></div>
+
+</body>
+
+</html>
